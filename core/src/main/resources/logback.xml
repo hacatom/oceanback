@@ -1,0 +1,18 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Ktor Logger to show requests and responses, disable in production if too verbose -->
+    <logger name="io.ktor.server.application" level="DEBUG" />
+    <logger name="io.ktor.server.netty" level="INFO" />
+    <logger name="io.ktor.server.engine" level="INFO" />
+    <logger name="org.jetbrains.exposed" level="DEBUG" /> <!-- Log Exposed DB queries -->
+    <logger name="com.github.ityeri.oceanwiki" level="DEBUG" /> <!-- Our application logs -->
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

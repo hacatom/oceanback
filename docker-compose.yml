@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: docker.io/library/mysql:8.0
+    container_name: oceanwiki_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: oceanwikidb
+
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  app:
+    build: .
+    image: oceanwiki_app_image
+    container_name: oceanwiki_app
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      APP_ENV: development
+
+      DB_HOST: db
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      DB_NAME: oceanwikidb
+
+    depends_on:
+      - db
+
+volumes:
+  dbdata:
